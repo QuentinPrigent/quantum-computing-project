@@ -20,8 +20,14 @@ class ConnectionManager:
     def get_to_least_busy_quantum_computer(self):
         if self.real_machine:
             try:
-                provider = IBMQ.get_provider(hub='ibm-q', group='open', project='main')
-                self.backend = least_busy(provider.backends(simulator=False))
+                provider = IBMQ.get_provider(
+                    hub='ibm-q', group='open', project='main'
+                )
+                self.backend = least_busy(
+                    provider.backends(
+                        filters=lambda device: not device.configuration().simulator
+                    )
+                )
             except Exception:
                 print('Impossible to connect to a quantum computer')
         else:
