@@ -1,11 +1,12 @@
 import unittest
 from unittest.mock import MagicMock
 from qiskit import IBMQ
+from qiskit import QuantumCircuit, BasicAer
 
 from src.services.connection_manager import account_initialization_manager, ConnectionManager
 
 
-class TestConnectionManager(unittest.TestCase):
+class TestAccountInitializationManager(unittest.TestCase):
     def test_account_initialization_manager_with_no_key(self):
         IBMQ.save_account = MagicMock()
         IBMQ.load_account = MagicMock()
