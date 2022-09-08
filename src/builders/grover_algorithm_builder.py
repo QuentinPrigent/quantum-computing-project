@@ -6,7 +6,6 @@ class GroverAlgorithmBuilder:
         self.oracle_quantum_circuit = None
         self.grover_quantum_circuit = None
         self.reflection_quantum_circuit = None
-        pass
 
     def two_qubits_oracle_builder(self):
         number_of_qubits = 2
