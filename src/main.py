@@ -1,13 +1,12 @@
 from services.connection_manager import account_initialization_manager, ConnectionManager
-from qiskit import QuantumCircuit
+from builders.grover_algorithm_builder import GroverAlgorithmBuilder
 
 if __name__ == '__main__':
     account_initialization_manager()
 
-    quantum_circuit = QuantumCircuit(3)
-    quantum_circuit.h(0)
-    quantum_circuit.cx(0, [1, 2])
-    quantum_circuit.measure_all()
+    algorithm_builder = GroverAlgorithmBuilder()
+    algorithm_builder.two_qubits_grover_circuit_builder()
+    quantum_circuit = algorithm_builder.grover_quantum_circuit
     print('Quantum circuit ready.')
 
     connection_manager = ConnectionManager(real_machine=True)
@@ -16,5 +15,5 @@ if __name__ == '__main__':
     print('Connected to quantum computer:')
     print(quantum_computer)
 
-    job = connection_manager.run_quantum_circuit(quantum_circuit=quantum_circuit)
+    job = connection_manager.run_quantum_circuit(quantum_circuit=quantum_circuit, number_of_shots=1)
     print(job.result().get_counts())

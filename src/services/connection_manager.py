@@ -35,8 +35,8 @@ class ConnectionManager:
             self.quantum_computer = BasicAer.get_backend('qasm_simulator')
         return self.quantum_computer
 
-    def run_quantum_circuit(self, quantum_circuit):
+    def run_quantum_circuit(self, quantum_circuit, number_of_shots):
         transpiled_quantum_circuit = transpile(quantum_circuit, self.quantum_computer)
-        job = self.quantum_computer.run(transpiled_quantum_circuit)
+        job = self.quantum_computer.run(transpiled_quantum_circuit, shots=number_of_shots)
         job_monitor(job)
         return job
