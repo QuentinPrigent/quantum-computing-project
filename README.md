@@ -6,13 +6,13 @@ circuit, compile it in a way be read by a quantum computer and
 send it to a real machine. Real time evolution is displayed in the 
 console.
 ## How to install
-Before running it one needs to create a python virtual environment 
+Before running it, one needs to create a python virtual environment 
 and installed libraries via the following command.
 ```
 pip install -r requirements.txt
 ```
-A IBM API token is required an can be obtained by creating an account
-on their website.
+The application requires a token from IBM to run. It can be obtained
+by creating an account on their website.
 
 https://quantum-computing.ibm.com/
 
