@@ -1,0 +1,5 @@
+c example DIMACS-CNF 3-SAT
+p cnf 5 3
+1 2 -3 4 -5 0
+-1 -2 3 4 -5 0
+-1 -2 3 -4 5 0

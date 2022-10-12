@@ -10,22 +10,13 @@ class TestGroverAlgorithmBuilder(unittest.TestCase):
         super(TestGroverAlgorithmBuilder, self).__init__(*args, **kwargs)
         self.builder = GroverAlgorithmBuilder()
 
-    def test_two_qubits_oracle_builder(self):
-        self.builder.two_qubits_grover_circuit_builder()
-        self.assertEqual(self.builder.oracle_quantum_circuit.num_qubits, 2)
+    def test_oracle_builder(self):
+        self.builder.oracle_quantum_circuit_builder()
         self.assertIsInstance(self.builder.oracle_quantum_circuit, QuantumCircuit)
+        self.assertEqual(self.builder.number_of_qubits, self.builder.oracle_quantum_circuit.num_qubits)
 
-    def test_two_qubits_reflection_builder(self):
-        self.builder.two_qubits_grover_circuit_builder()
-        self.assertEqual(self.builder.oracle_quantum_circuit.num_qubits, 2)
-        self.assertIsInstance(self.builder.oracle_quantum_circuit, QuantumCircuit)
-
-    def test_two_qubits_grover_circuit_builder(self):
-        self.builder.two_qubits_grover_circuit_builder()
-        self.assertEqual(self.builder.oracle_quantum_circuit.num_qubits, 2)
-        self.assertIsInstance(self.builder.oracle_quantum_circuit, QuantumCircuit)
-        self.assertEqual(self.builder.oracle_quantum_circuit.num_qubits, 2)
-        self.assertIsInstance(self.builder.oracle_quantum_circuit, QuantumCircuit)
-        self.assertEqual(self.builder.grover_quantum_circuit.num_qubits, 2)
-        self.assertEqual(self.builder.grover_quantum_circuit.num_clbits, 2)
-        self.assertIsInstance(self.builder.grover_quantum_circuit, QuantumCircuit)
+    def test_grover_algorithm_quantum_circuit_builder(self):
+        self.builder.oracle_quantum_circuit_builder()
+        self.builder.grover_algorithm_quantum_circuit_builder()
+        self.assertIsInstance(self.builder.grover_algorithm_quantum_circuit, QuantumCircuit)
+        self.assertEqual(self.builder.number_of_qubits, self.builder.grover_algorithm_quantum_circuit.num_qubits)

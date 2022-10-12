@@ -1,37 +1,23 @@
+import os
 from qiskit import QuantumCircuit
+from qiskit.circuit.library import PhaseOracle, GroverOperator
 
 
 class GroverAlgorithmBuilder:
     def __init__(self):
+        self.number_of_qubits = None
+
         self.oracle_quantum_circuit = None
-        self.grover_quantum_circuit = None
-        self.reflection_quantum_circuit = None
+        self.grover_algorithm_quantum_circuit = None
 
-    def two_qubits_oracle_builder(self):
-        number_of_qubits = 2
-        quantum_circuit = QuantumCircuit(number_of_qubits, name='oracle')
-        quantum_circuit.cz(0, 1)
-        quantum_circuit.to_gate()
-        self.oracle_quantum_circuit = quantum_circuit
+    def oracle_quantum_circuit_builder(self):
+        project_directory = os.getcwd()
+        self.oracle_quantum_circuit = PhaseOracle.from_dimacs_file(project_directory + '/files/search.dimacs')
+        self.number_of_qubits = self.oracle_quantum_circuit.num_qubits
 
-    def two_qubits_reflection_builder(self):
-        number_of_qubits = 2
-        quantum_circuit = QuantumCircuit(number_of_qubits, name='reflection')
-        quantum_circuit.h([0, 1])
-        quantum_circuit.z([0, 1])
-        quantum_circuit.cz(0, 1)
-        quantum_circuit.h([0, 1])
-        quantum_circuit.to_gate()
-        self.reflection_quantum_circuit = quantum_circuit
-
-    def two_qubits_grover_circuit_builder(self):
-        number_of_qubits = 2
-        number_of_bits = 2
-        self.two_qubits_oracle_builder()
-        self.two_qubits_reflection_builder()
-        quantum_circuit = QuantumCircuit(number_of_qubits, number_of_bits, name='grover')
-        quantum_circuit.h([0, 1])
-        quantum_circuit.append(self.oracle_quantum_circuit, [0, 1])
-        quantum_circuit.append(self.reflection_quantum_circuit, [0, 1])
-        quantum_circuit.measure([0, 1], [0, 1])
-        self.grover_quantum_circuit = quantum_circuit
+    def grover_algorithm_quantum_circuit_builder(self):
+        self.grover_algorithm_quantum_circuit = QuantumCircuit(self.number_of_qubits)
+        self.grover_algorithm_quantum_circuit.h([index for index in range(self.number_of_qubits)])
+        grover_operator = GroverOperator(self.oracle_quantum_circuit)
+        self.grover_algorithm_quantum_circuit = self.grover_algorithm_quantum_circuit.compose(grover_operator)
+        self.grover_algorithm_quantum_circuit.measure_all()
