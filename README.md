@@ -23,6 +23,11 @@ the application run.
 
 ### Create an input file
 
+The input file for the search is located in `files` and is a `.dimacs` format. For more information about `.dimacs` file
+see below.
+
+https://jix.github.io/varisat/manual/0.2.0/formats/dimacs.html
+
 ### Run the program
 
 The command to run the application is the following.

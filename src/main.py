@@ -5,9 +5,9 @@ if __name__ == '__main__':
     account_initialization_manager()
 
     algorithm_builder = GroverAlgorithmBuilder()
-    algorithm_builder.oracle_builder()
-    algorithm_builder.grover_quantum_circuit_builder()
-    quantum_circuit = algorithm_builder.grover_quantum_circuit
+    algorithm_builder.oracle_quantum_circuit_builder()
+    algorithm_builder.grover_algorithm_quantum_circuit_builder()
+    quantum_circuit = algorithm_builder.grover_algorithm_quantum_circuit
     print('Quantum circuit ready.')
 
     connection_manager = ConnectionManager(real_machine=False)
